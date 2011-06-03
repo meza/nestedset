@@ -7,9 +7,9 @@ define('ROOTDIR', realpath(__DIR__.'/../..'));
 require_once('PHPUnit/Autoload.php');
 require_once('PHPUnit/Framework/Assert/Functions.php');
 
-require_once(SRCDIR.'/Database.php');
-require_once(SRCDIR.'/MysqlDatabase.php');
-require_once(SRCDIR.'/NestedSetDao.php');
+require_once(SRCDIR.'/lib/Database.php');
+require_once(SRCDIR.'/lib/MysqlDatabase.php');
+require_once(SRCDIR.'/lib/NestedSetDao.php');
 
 
 define('TEST_DIST_CONFIG', ROOTDIR.'/test.properties.dist');
