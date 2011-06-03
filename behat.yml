@@ -1,0 +1,11 @@
+default:
+  formatter:
+    name: 'progress'
+
+ajax:
+  filters:
+    tags: '@ajax'
+
+lib:
+  filters:
+    tags: '@lib'
