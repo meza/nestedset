@@ -28,6 +28,11 @@ $steps->When('/^I remove the node "([^"]*)"$/', function($world, $node) {
     $world->dao->removeNode($node);
 });
 
+$steps->When('/^I rename the node "([^"]*)" to "([^"]*)"$/', function($world, $nodeName, $nodeNewName) {
+    $world->dao->renameNode($nodeName, $nodeNewName);
+});
+
+
 $steps->Then('/^The result is$/', function($world, $table) {
     $set  = $world->dao->getTreeFromNode('Root');
 	$hash = $table->getHash();

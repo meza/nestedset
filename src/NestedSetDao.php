@@ -90,6 +90,13 @@ class NestedSetDao
 			);
 		return $this->db->transaction($sql);
 	}
+
+	public function renameNode($nodeName, $nodeNewName)
+	{
+		$sql = 'UPDATE tree SET name="'.$nodeNewName.'" WHERE name="'.$nodeName.'";';
+		return $this->db->query($sql);
+	}
+
 }
 
 //end class
