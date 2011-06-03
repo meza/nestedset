@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/node/.*$
+RewriteRule . index.php [L]

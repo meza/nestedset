@@ -1,10 +1,10 @@
-@lib
+@ajax
 Feature: Insert
   Insert a Root to the nested set
 
   Scenario: New root element
     Given I have an empty set
-     When I enter a node with the name "Root"
+     When I put a node with the name "Root"
      Then The result is
        | name | lft | rht |
        | Root | 1   | 2   |
@@ -15,7 +15,7 @@ Feature: Insert
       | Root        | 1   | 6   |
       | Child1      | 2   | 3   |
       | Child2      | 4   | 5   |
-    When I enter a node under "Child1" with the name "GrandChild1"
+    When I http put a node to "Child1" with the name "GrandChild1"
     Then The result is
       | name        | lft | rht |
       | Root        | 1   | 8   |

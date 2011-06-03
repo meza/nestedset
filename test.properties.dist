@@ -3,3 +3,6 @@
 	user=ns
 	pass=ns
 	db=ns
+
+[http]
+	baseUrl=http://127.0.0.1

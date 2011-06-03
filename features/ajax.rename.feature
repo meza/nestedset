@@ -1,4 +1,4 @@
-@lib
+@ajax
 Feature: Rename
   Scenario: Rename node
     Given I have a set
@@ -7,7 +7,7 @@ Feature: Rename
       | Child1      | 2   | 5   |
       | GrandChild1 | 3   | 4   |
       | Child2      | 6   | 7   |
-    When I rename the node "Child1" to "Renamed Child 1"
+    When I http post to the node "Child1" the name "Renamed Child 1"
     Then The result is
       | name            | lft | rht |
       | Root            | 1   | 8   |
