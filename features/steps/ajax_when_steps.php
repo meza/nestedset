@@ -3,7 +3,7 @@ $steps->When('/^I http delete the node "([^"]*)"$/', function($world, $nodeName)
     $world->curl->call($world->config['http']['baseUrl'].'/node/'.$nodeName, 'DELETE');
 });
 
-$steps->When('/^I put a node with the name "([^"]*)"$/', function($world, $nodeName) {
+$steps->When('/^I http put a node with the name "([^"]*)"$/', function($world, $nodeName) {
     $world->curl->call($world->config['http']['baseUrl'].'/node/'.$nodeName, 'PUT');
 });
 

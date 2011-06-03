@@ -4,7 +4,7 @@ Feature: Insert
 
   Scenario: New root element
     Given I have an empty set
-     When I put a node with the name "Root"
+     When I http put a node with the name "Root"
      Then The result is
        | name | lft | rht |
        | Root | 1   | 2   |
