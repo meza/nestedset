@@ -1,17 +1,18 @@
 <?php
 
-require_once('PHPUnit/Autoload.php');
-require_once('PHPUnit/Framework/Assert/Functions.php');
+$distConfig = parse_ini_file(TEST_DIST_CONFIG, true);
+$userConfig = array();
+if (file_exists(TEST_USER_CONFIG)) {
+	$userConfig = parse_ini_file(TEST_USER_CONFIG, true);
+}
 
-require_once(SRCDIR.'/Database.php');
-require_once(SRCDIR.'/MysqlDatabase.php');
-require_once(SRCDIR.'/NestedSetDao.php');
+$config = array_merge($distConfig, $userConfig);
 
 $world->db = new MysqlDatabase(
-	'192.168.56.101',
-	'ns',
-	'ns',
-	'ns'
+	$config['database']['host'],
+	$config['database']['user'],
+	$config['database']['pass'],
+	$config['database']['db']
 );
 
 $world->dao = new NestedSetDao($world->db);
