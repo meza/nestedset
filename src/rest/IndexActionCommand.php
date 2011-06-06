@@ -3,15 +3,17 @@ class IndexActionCommand implements NodeCommand
 {
 
 	private $dao;
+	private $layout;
 
-	public function __construct(NestedSetDao $dao)
+	public function __construct(NestedSetDao $dao, Layout $layout)
 	{
-		$this->dao = $dao;
+		$this->dao    = $dao;
+		$this->layout = $layout;
 	}
 
 	public function createResponse()
 	{
-		return RestResponse::createOKWithHtmlDataResponse($this->dao->getTree());
+		return RestResponse::createOKWithHtmlDataResponse($this->layout->render($this->dao->getTree()));
 	}
 }
 ?>

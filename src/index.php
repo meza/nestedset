@@ -5,6 +5,8 @@ define('DIST_CONFIG', ROOTDIR.'/run.properties.dist');
 define('USER_CONFIG', ROOTDIR.'/run.properties');
 
 
+require_once(SRCDIR.'/view/Layout.php');
+require_once(SRCDIR.'/view/HtmlLayout.php');
 require_once(SRCDIR.'/rest/RestResponse.php');
 require_once(SRCDIR.'/rest/CommandBuilder.php');
 require_once(SRCDIR.'/rest/NodeCommand.php');
@@ -39,7 +41,7 @@ $path   = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 $commandBuilder = new CommandBuilder();
-$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST);
+$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST, new HtmlLayout(__DIR__.'/x.html'));
 $response       = $command->createResponse();
 
 $response->send();

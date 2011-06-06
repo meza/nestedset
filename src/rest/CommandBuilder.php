@@ -1,8 +1,13 @@
 <?php
 class CommandBuilder
 {
-	public function getCommand(NestedSetDao $dao, $uri, $method, $postData)
-	{
+	public function getCommand(
+		NestedSetDao $dao, 
+		$uri, 
+		$method, 
+		$postData,
+		Layout $layout=null
+	) {
 		if (preg_match_all('/\/node\/(.*)/', $uri, $matches)) {
 			$nodePath = $matches[1][0];
 			$nodes    = explode('/', $nodePath);
@@ -14,7 +19,7 @@ class CommandBuilder
 				default      : return RestResponse::createErrorResponse('Error');
 			}
 		}
-		return new IndexActionCommand($dao);
+		return new IndexActionCommand($dao, $layout);
 	}
 }
 ?>
