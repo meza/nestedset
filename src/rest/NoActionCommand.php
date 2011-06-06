@@ -9,9 +9,9 @@ class NoActionCommand implements NodeCommand
 		$this->dao = $dao;
 	}
 
-	public function execute()
+	public function createResponse()
 	{
-		print $this->dao->getTree();
+		return RestResponse::createOKWithHtmlDataResponse($this->dao->getTree());
 	}
 }
 ?>

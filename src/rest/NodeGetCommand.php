@@ -10,13 +10,13 @@ class NodeGetCommand implements NodeCommand
 		$this->nodes = $nodes;
 	}
 
-	public function execute()
+	public function createResponse()
 	{
 		$count = count($this->nodes);
 		if ($count <= 0) {
-			return;
+			return RestResponse.createErrorResponse('No node given');
 		}
-		print $this->dao->getHtmlTreeFromNode($this->nodes[$count-1]);
+		return RestResponse::createOkWithHtmlDataResponse($this->dao->getHtmlTreeFromNode($this->nodes[$count-1]));
 	}
 }
 ?>

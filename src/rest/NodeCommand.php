@@ -1,6 +1,11 @@
 <?php
 interface NodeCommand
 {
-	public function execute();
+	/**
+	 * Executes a command
+	 *
+	 * @return Response
+	 */
+	public function createResponse();
 }
 ?>

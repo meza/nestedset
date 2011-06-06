@@ -11,7 +11,7 @@ class CommandBuilder
 				case 'POST'  : return new NodePostCommand($dao, $nodes, $postData);
 				case 'DELETE': return new NodeDeleteCommand($dao, $nodes);
 				case 'GET'   : return new NodeGetCommand($dao, $nodes);
-				default      : return new NoActionCommand();
+				default      : return RestResponse::createErrorResponse('Error');
 			}
 		}
 		return new NoActionCommand($dao);

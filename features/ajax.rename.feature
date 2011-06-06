@@ -14,3 +14,4 @@ Feature: Rename
       | Renamed Child 1 | 2   | 5   |
       | GrandChild1     | 3   | 4   |
       | Child2          | 6   | 7   |
+    And The response code is 200

@@ -12,19 +12,19 @@ class NodePostCommand implements NodeCommand
 		$this->postData = $postData;
 	}
 
-	public function execute()
+	public function createResponse()
 	{
 		$count = count($this->nodes);
 		if ($count <= 0) {
-			return;
+			return Response.createErrorResponse('No node given');
 		}
 		$nodeName = $this->nodes[$count-1];
 
 		if (false === isset($this->postData[$nodeName])) {
-			return;
+			return Response.createErrorResponse('No new name given');
 		}
-
 		$this->dao->renameNode($nodeName, $this->postData[$nodeName]['name']);
+		return RestResponse::createOKResponse();
 	}
 }
 ?>

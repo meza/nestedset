@@ -5,6 +5,7 @@ define('DIST_CONFIG', ROOTDIR.'/run.properties.dist');
 define('USER_CONFIG', ROOTDIR.'/run.properties');
 
 
+require_once(SRCDIR.'/rest/RestResponse.php');
 require_once(SRCDIR.'/rest/CommandBuilder.php');
 require_once(SRCDIR.'/rest/NodeCommand.php');
 require_once(SRCDIR.'/rest/NoActionCommand.php');
@@ -38,6 +39,9 @@ $path   = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 $commandBuilder = new CommandBuilder();
-$commandBuilder->getCommand($dao, $path, $method, $_POST)->execute();
+$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST);
+$response       = $command->createResponse();
+
+$response->send();
 
 ?>

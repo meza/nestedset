@@ -10,7 +10,7 @@ class NodePutCommand implements NodeCommand
 		$this->nodes = $nodes;
 	}
 
-	public function execute()
+	public function createResponse()
 	{
 		$count = count($this->nodes);
 		if( $count == 1) {
@@ -18,6 +18,8 @@ class NodePutCommand implements NodeCommand
 		} else {
 			$this->dao->insertNode($this->nodes[$count-1], $this->nodes[$count-2]);
 		}
+
+		return RestResponse::createCreatedResponse();
 	}
 }
 ?>

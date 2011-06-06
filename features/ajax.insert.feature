@@ -8,6 +8,7 @@ Feature: Insert
      Then The result is
        | name | lft | rht |
        | Root | 1   | 2   |
+      And The response code is 201
 
   Scenario: New child element
     Given I have a set
@@ -22,3 +23,4 @@ Feature: Insert
       | Child1      | 2   | 5   |
       | GrandChild1 | 3   | 4   |
       | Child2      | 6   | 7   |
+     And The response code is 201

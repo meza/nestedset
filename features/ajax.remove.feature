@@ -12,3 +12,4 @@ Feature: Remove
       | name        | lft | rht |
       | Root        | 1   | 4   |
       | Child2      | 2   | 3   |
+    And The response code is 200

@@ -1,6 +1,14 @@
 <?php
 class CurlHelper
 {
+
+	private $lastHTTPCode;
+
+	public function lastHTTPCode()
+	{
+		return $this->lastHTTPCode;
+	}
+
 	public function call($url, $method='GET', $data=array())
 	{
 		$method = strtoupper($method);
@@ -19,6 +27,7 @@ class CurlHelper
 			curl_setopt($ch, CURLOPT_URL, $url.'?'.$this->formatData($data));
 		}
 		$result = curl_exec($ch);
+		$this->lastHTTPCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 	}
 
