@@ -38,6 +38,6 @@ $path   = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 $commandBuilder = new CommandBuilder();
-$commandBuilder->getCommand($dao, $path, $method)->execute();
+$commandBuilder->getCommand($dao, $path, $method, $_POST)->execute();
 
 ?>

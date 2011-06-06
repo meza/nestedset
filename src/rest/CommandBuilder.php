@@ -1,27 +1,20 @@
 <?php
 class CommandBuilder
 {
-	public function getCommand(NestedSetDao $dao, $uri, $method)
+	public function getCommand(NestedSetDao $dao, $uri, $method, $postData)
 	{
-		$command = new NoActionCommand($dao);
 		if (preg_match_all('/\/node\/(.*)/', $uri, $matches)) {
 			$nodePath = $matches[1][0];
-			$nodes = explode('/', $nodePath);
-			if ($method == 'GET') {
-				$command = new NodeGetCommand($dao, $nodes);
-			} elseif ($method == 'PUT') {
-				$command = new NodePutCommand($dao, $nodes);
-			} elseif ($method == 'POST') {
-				$nodeName = $nodes[count($nodes)-1];
-				if (false == isset($_POST[$nodeName])) {
-					return;
-				}
-				$command = new NodePostCommand($dao, $nodes, $_POST[$nodeName]);
-			} elseif ($method == 'DELETE') {
-				$command = new NodeDeleteCommand($dao, $nodes);
+			$nodes    = explode('/', $nodePath);
+			switch($method) {
+				case 'PUT'   : return new NodePutCommand($dao, $nodes);
+				case 'POST'  : return new NodePostCommand($dao, $nodes, $postData);
+				case 'DELETE': return new NodeDeleteCommand($dao, $nodes);
+				case 'GET'   : return new NodeGetCommand($dao, $nodes);
+				default      : return new NoActionCommand();
 			}
 		}
-		return $command;
+		return new NoActionCommand($dao);
 	}
 }
 ?>

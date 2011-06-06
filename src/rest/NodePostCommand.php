@@ -3,13 +3,13 @@ class NodePostCommand implements NodeCommand
 {
 	private $dao;
 	private $nodes;
-	private $newNode;
+	private $postData;
 
-	public function __construct(NestedSetDao $dao, $nodes, $newNode)
+	public function __construct(NestedSetDao $dao, $nodes, $postData)
 	{
 		$this->dao     = $dao;
 		$this->nodes   = $nodes;
-		$this->newNode = $newNode;
+		$this->postData = $postData;
 	}
 
 	public function execute()
@@ -20,9 +20,11 @@ class NodePostCommand implements NodeCommand
 		}
 		$nodeName = $this->nodes[$count-1];
 
-		if (isset($this->newNode['name'])) {
-			$this->dao->renameNode($nodeName, $this->newNode['name']);
+		if (false === isset($this->postData[$nodeName])) {
+			return;
 		}
+
+		$this->dao->renameNode($nodeName, $this->postData[$nodeName]['name']);
 	}
 }
 ?>
