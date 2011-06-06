@@ -22,21 +22,62 @@ class NestedSetDao
 	}
 
 
-	public function getTreeFromNode($nodeName)
+	public function getTree()
+	{
+		$qry = array(
+			'variables' => 'SELECT @right:=rht FROM tree WHERE lft=1;',
+			'resultset' => 'SELECT name, lft, rht FROM tree WHERE lft BETWEEN 1 AND @right ORDER BY lft ASC;',
+		);
+
+		$r = $this->db->transaction($qry);
+		$c = 0;
+		while($pathElement = mysql_fetch_assoc($r['resultset'])) {
+			if ($c == 0) {
+				$result = new Node($pathElement['name'], $pathElement['lft'], $pathElement['rht']);
+				$c++;
+			} else {
+				$result->add(new Node($pathElement['name'], $pathElement['lft'], $pathElement['rht']));
+			}
+		}
+		$visitor = new HtmlVisitor();
+		$result->accept($visitor);
+		return $visitor->output();
+	}
+
+	public function getTreeFromNode($nodeName, Visitor $visitor=null)
 	{
 		$qry = array(
 			'variables' => 'SELECT @left:=lft, @right:=rht FROM tree WHERE name="'.$nodeName.'";',
 			'resultset' => 'SELECT name, lft, rht FROM tree WHERE lft BETWEEN @left AND @right ORDER BY lft ASC;',
 		);
-
 		$r = $this->db->transaction($qry);
 		$result = array();
 		while($pathElement = mysql_fetch_assoc($r['resultset'])) {
 			$result[] = $pathElement;
 		}
-
+		
 		return $result;
+	}
 
+	public function getHtmlTreeFromNode($nodeName)
+	{
+		$qry = array(
+			'variables' => 'SELECT @left:=lft, @right:=rht FROM tree WHERE name="'.$nodeName.'";',
+			'resultset' => 'SELECT name, lft, rht FROM tree WHERE lft BETWEEN @left AND @right ORDER BY lft ASC;',
+		);
+		$r = $this->db->transaction($qry);
+		$c = 0;
+		while($pathElement = mysql_fetch_assoc($r['resultset'])) {
+			if ($c == 0) {
+				$result = new Node($pathElement['name'], $pathElement['lft'], $pathElement['rht']);
+				$c++;
+			} else {
+				$result->add(new Node($pathElement['name'], $pathElement['lft'], $pathElement['rht']));
+			}
+		}
+		$visitor = new HtmlVisitor();
+		$result->accept($visitor);
+		return $visitor->output();
 	}
 
 	public function getNode($nodeName)
