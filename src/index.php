@@ -8,7 +8,7 @@ define('USER_CONFIG', ROOTDIR.'/run.properties');
 require_once(SRCDIR.'/rest/RestResponse.php');
 require_once(SRCDIR.'/rest/CommandBuilder.php');
 require_once(SRCDIR.'/rest/NodeCommand.php');
-require_once(SRCDIR.'/rest/NoActionCommand.php');
+require_once(SRCDIR.'/rest/IndexActionCommand.php');
 require_once(SRCDIR.'/rest/NodePutCommand.php');
 require_once(SRCDIR.'/rest/NodePostCommand.php');
 require_once(SRCDIR.'/rest/NodeGetCommand.php');

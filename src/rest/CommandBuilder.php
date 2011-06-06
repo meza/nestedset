@@ -14,7 +14,7 @@ class CommandBuilder
 				default      : return RestResponse::createErrorResponse('Error');
 			}
 		}
-		return new NoActionCommand($dao);
+		return new IndexActionCommand($dao);
 	}
 }
 ?>

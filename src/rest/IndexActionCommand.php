@@ -1,5 +1,5 @@
 <?php
-class NoActionCommand implements NodeCommand
+class IndexActionCommand implements NodeCommand
 {
 
 	private $dao;
