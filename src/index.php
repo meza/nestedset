@@ -41,7 +41,7 @@ $path   = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 $commandBuilder = new CommandBuilder();
-$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST, new HtmlLayout(__DIR__.'/x.html'));
+$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST, new HtmlLayout(__DIR__.'/templates/index.html'));
 $response       = $command->createResponse();
 
 $response->send();
