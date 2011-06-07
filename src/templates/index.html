@@ -1,6 +1,87 @@
 <html>
-	<head></head>
-	<body>
+    <head>
+	<link rel="Stylesheet" href="/rsc/css/jquery.contextMenu.css"/>
+	<link rel="Stylesheet" href="/rsc/css/jquery.treeview.css"/>
+    </head>
+    <body>
+	<div id="treeDiv" class="treeview-black">
 		###tree###
-	</body>
+	</div>
+	<ul id="myMenu" class="contextMenu">
+	    <li class="edit">
+		<a href="#rename">Rename</a>
+	    </li>
+	    <li class="paste">
+		<a href="#add">Add</a>
+	    </li>
+	    <li class="delete">
+		<a href="#delete">Delete</a>
+	    </li>
+	</ul>
+	<script type="text/javascript" lang="JavaScript" src="/rsc/js/lib/jquery.js"></script>
+	<script type="text/javascript" lang="JavaScript" src="/rsc/js/jquery.treeview.js"></script>
+	<script type="text/javascript" lang="JavaScript" src="/rsc/js/jquery.contextMenu.js"></script>
+	<script>
+	    function remove(node) {
+		$.ajax({
+		    url: '/node/'+node,
+		    type: 'DELETE',
+		    async:false
+		});
+		initTree();
+	    }
+	    function rename(root, newName)
+	    {
+		$.ajax({
+		    url: '/node/'+root,
+		    type: 'POST',
+		    data: {
+			    "name": newName
+		    },
+		    async:false
+		});
+		initTree();
+	    }
+	    function add(root, childName)
+	    {
+		$.ajax({
+		    url: '/node/'+root+"/"+childName,
+		    type: 'PUT',
+		    async:false
+		});
+		initTree();
+	    }
+
+	    function initContextMenu()
+	    {
+		$("li").contextMenu({
+		    menu: 'myMenu'
+		},
+		function(action, el, pos) {
+		    if(action=="rename") {
+			rename($(el).attr('name'), prompt("New name", ""))
+		    } else if(action=="add") {
+			add($(el).attr('name'), prompt("Child name", ""))
+		    } else if(action=="delete") {
+			remove($(el).attr('name'));
+		    }
+		});
+	    }
+	    function initTree()
+	    {
+		$("#treeDiv").empty();
+		$("#treeDiv").html($.ajax({
+		    url:'/node/',
+		    dataType: 'html',
+		    async: false
+		}).responseText);
+
+		$("#treeDiv").treeview();
+		initContextMenu();
+	    }
+	    $(document).ready(function(){
+		initTree();
+	    })
+	</script>
+    </body>
 </html>

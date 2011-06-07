@@ -1,5 +1,5 @@
 <?php
-class NodeDeleteCommand implements NodeCommand
+class NodeGetCommand implements NodeCommand
 {
 	private $dao;
 	private $nodes;
@@ -14,10 +14,9 @@ class NodeDeleteCommand implements NodeCommand
 	{
 		$count = count($this->nodes);
 		if ($count <= 0) {
-			return RestResponse.createErrorResponse('No node given');
+			return RestResponse::createErrorResponse('No node given');
 		}
-		$this->dao->removeNode($this->nodes[$count-1]);
-		return RestResponse::createOKResponse();
+		return RestResponse::createOkWithHtmlDataResponse($this->dao->getTree());
 	}
 }
 ?>

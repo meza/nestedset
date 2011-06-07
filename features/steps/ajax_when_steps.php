@@ -12,6 +12,6 @@ $steps->When('/^I http put a node to "([^"]*)" with the name "([^"]*)"$/', funct
 });
 
 $steps->When('/^I http post to the node "([^"]*)" the name "([^"]*)"$/', function($world, $nodeName, $newNodeName) {
-    $world->lastCurlHandler = $world->curl->call($world->config['http']['baseUrl'].'/node/'.$nodeName, 'POST', array($nodeName => array('name' => $newNodeName)));
+    $world->lastCurlHandler = $world->curl->call($world->config['http']['baseUrl'].'/node/'.$nodeName, 'POST', array('name' => $newNodeName));
 });
 ?>

@@ -55,7 +55,7 @@ class NestedSetDao
 		while($pathElement = mysql_fetch_assoc($r['resultset'])) {
 			$result[] = $pathElement;
 		}
-		
+
 		return $result;
 	}
 

@@ -41,7 +41,7 @@ $steps->When('/^I list the tree from node "([^"]*)"$/', function($world, $nodeNa
 });
 
 
-$steps->Then('/^The resulting html fragment should be "([^"]*)"$/', function($world, $expectedHtml) {
+$steps->Then("/^The resulting html fragment should be '([^']*)'$/", function($world, $expectedHtml) {
     assertEquals($expectedHtml, $world->listHtml);
 });
 

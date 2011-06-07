@@ -16,14 +16,13 @@ class NodePostCommand implements NodeCommand
 	{
 		$count = count($this->nodes);
 		if ($count <= 0) {
-			return Response.createErrorResponse('No node given');
+			return RestResponse::createErrorResponse('No node given');
 		}
 		$nodeName = $this->nodes[$count-1];
-
-		if (false === isset($this->postData[$nodeName])) {
-			return Response.createErrorResponse('No new name given');
+		if (false === isset($this->postData['name'])) {
+			return RestResponse::createErrorResponse('No new name given');
 		}
-		$this->dao->renameNode($nodeName, $this->postData[$nodeName]['name']);
+		$this->dao->renameNode($nodeName, $this->postData['name']);
 		return RestResponse::createOKResponse();
 	}
 }

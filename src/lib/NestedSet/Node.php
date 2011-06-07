@@ -18,7 +18,7 @@ class Node
 
 	public function accept(Visitor $visitor)
 	{
-		$visitor->visitEnter();
+		$visitor->visitEnter($this);
 		$visitor->visit($this);
 		foreach ($this->children as $child)
 		{
