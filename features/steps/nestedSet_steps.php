@@ -1,4 +1,11 @@
 <?php
+/**
+ * nestedSet_steps.php
+ *
+ * @author meza <meza@meza.hu>
+ *
+ * Step definitions for lib based behat tests
+ */
 $steps->Given('/^I have an empty set$/', function($world) {
     $world->db->query('TRUNCATE TABLE tree;');
 });

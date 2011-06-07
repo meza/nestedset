@@ -1,4 +1,11 @@
 <?php
+/**
+ * ajax_when_steps.php
+ *
+ * @author meza <meza@meza.hu>
+ *
+ * Step definitions for ajax based behat tests
+ */
 $steps->When('/^I http delete the node "([^"]*)"$/', function($world, $nodeName) {
     $world->lastCurlHandler = $world->curl->call($world->config['http']['baseUrl'].'/node/'.$nodeName, 'DELETE');
 });

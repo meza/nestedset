@@ -1,4 +1,24 @@
 <?php
+/**
+ * index.php
+ *
+ * @author meza <meza@meza.hu>
+ */
+
+/**
+ * A feladat egy faszerkezet kezelésének megoldása.
+ * A böngészőben unordered list (UL>LI) formában jelenítsd meg az
+ * adatbázisban tárolt fát. Legyen lehetőség új faelem hozzáadására,
+ * régi törlésére, a faelem nevének átírására.
+ * Az adatbázis MySQL, a szerver oldali kód PHP legyen, a műveletek AJAX-szal,
+ * jQuery felhasználásával működjenek. Nem kötelező, de értékeljük,
+ * ha a MySQL adatszerkezetnél "nested set" algoritmust használsz a fa
+ * tárolásához, illetve ha a megjelenítés egy bonyolultabb JavaScriptes
+ * nyitható-csukható megoldással készül el. Amit szeretnénk kapni:
+ * - mysql adatbázis generáló és adatbetöltő szkript
+ * - php, html/javascript kódok
+ * - rövid dokumentáció a működésről, telepítésről
+ */
 define('SRCDIR', realpath(__DIR__));
 define('ROOTDIR', realpath(__DIR__.'/..'));
 define('DIST_CONFIG', ROOTDIR.'/run.properties.dist');

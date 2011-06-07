@@ -1,7 +1,5 @@
 @lib
-Feature: Insert
-  Insert a Root to the nested set
-
+Feature: I can be able to insert a new node with the api.
   Scenario: New root element
     Given I have an empty set
      When I enter a node with the name "Root"

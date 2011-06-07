@@ -1,5 +1,5 @@
 @ajax
-Feature: Remove
+Feature: Removing nodes should be available through REST DELETE.
   Scenario: Remove node
     Given I have a set
       | name        | lft | rht |

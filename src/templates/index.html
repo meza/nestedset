@@ -65,6 +65,10 @@
 		    } else if(action=="add") {
 			add($(el).attr('name'), prompt("Child name", ""))
 		    } else if(action=="delete") {
+			if ($(el).hasClass('root')) {
+			    alert('Root cannot be removed!');
+			    return;
+			}
 			remove($(el).attr('name'));
 		    }
 		});

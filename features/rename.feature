@@ -1,5 +1,5 @@
 @lib
-Feature: Rename
+Feature: Renaming node should be possible with the api.
   Scenario: Rename node
     Given I have a set
       | name        | lft | rht |

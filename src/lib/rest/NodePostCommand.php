@@ -1,10 +1,41 @@
 <?php
+/**
+ * NodePostCommand.php
+ *
+ * @author meza <meza@meza.hu>
+ */
+
+/**
+ * The NodePostCommand gets executed on requesting a given node path with the
+ * method: POST.
+ */
 class NodePostCommand implements NodeCommand
 {
+	/**
+	 * @var NestedSetDao The dao to use.
+	 */
 	private $dao;
+
+	/**
+	 * @var string[] The nodes listed in the path.
+	 */
 	private $nodes;
+
+	/**
+	 * @var array Post data
+	 */
 	private $postData;
 
+
+	/**
+	 * Creates the obejct.
+	 *
+	 * @param NestedSetDao $dao      The dao to use.
+	 * @param string[]     $nodes    The nodes on the path.
+	 * @param array        $postData the post data.
+	 *
+	 * @return NodePostCommand
+	 */
 	public function __construct(NestedSetDao $dao, $nodes, $postData)
 	{
 		$this->dao     = $dao;

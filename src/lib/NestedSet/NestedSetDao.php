@@ -2,26 +2,45 @@
 /**
  * NestedSetDao.php
  *
- * Holds the NestedSetDao class
- *
- * @package  ingatlancomtest
  * @author   meza <meza@meza.hu>
  */
 
 /**
- * The NestedSetDao class is responsible for ...
+ * The NestedSetDao class is responsible for communicating with the given
+ * Database instance.
  */
 class NestedSetDao
 {
 
+	/**
+	 * @var Database instance to use.
+	 */
 	private $db;
 
+
+	/**
+	 * Create the object.
+	 *
+	 * @param Database $db The Database instance to use.
+	 *
+	 * @return NestedSetDao
+	 */
 	public function __construct(Database $db)
 	{
 		$this->db = $db;
 	}
 
 
+	/**
+	 * Retrieve a tree representation of the nodes.
+	 *
+	 * @param TreeProcessor $strategy The rocess startegy to use
+	 * @param string        $nodeName The node name to originate the tree from
+	 *
+	 * @return mixed - Depends on the strategy used.
+	 *
+	 * @todo Unify the output.
+	 */
 	public function getTree(TreeProcessor $strategy=null, $nodeName=null)
 	{
 		if(null == $nodeName) {
@@ -50,11 +69,30 @@ class NestedSetDao
 
 	}
 
+
+	/**
+	 * Shorthand to get the tree rooted from a given node.
+	 *
+	 * @param string        $nodeName The node name to originate from.
+	 * @param TreeProcessor $strategy The strategy to use.
+	 *
+	 * @return mixed. Depends on the strategy.
+	 * @todo Unify return.
+	 * @todo eliminate duplication.
+	 */
 	public function getTreeFrom($nodeName, TreeProcessor $strategy=null)
 	{
 		return $this->getTree($strategy, $nodeName);
 	}
 
+	/**
+	 * Insert a node under a parent.
+	 *
+	 * @param string $nodeName   The new child node's name.
+	 * @param string $parentName The parent node's name.
+	 *
+	 * @return void
+	 */
 	public function insertNode($nodeName, $parentName='')
 	{
 		if (empty($parentName)) {
@@ -68,10 +106,17 @@ class NestedSetDao
 			);
 		}
 
-		return $this->db->transaction($sql);
-
+		$this->db->transaction($sql);
 	}
 
+
+	/**
+	 * Removes a node.
+	 *
+	 * @param string $nodeName The node name to remove.
+	 *
+	 * @return void
+	 */
 	public function removeNode($nodeName)
 	{
 		$sql = array(
@@ -80,16 +125,21 @@ class NestedSetDao
 				'UPDATE tree SET rht=rht-@width WHERE rht > @right;',
 				'UPDATE tree SET lft=lft-@width WHERE lft > @right;',
 			);
-		return $this->db->transaction($sql);
+		$this->db->transaction($sql);
 	}
 
+
+	/**
+	 * Rename a node.
+	 *
+	 * @param string $nodeName    The original name of the node.
+	 * @param string $nodeNewName The new name of the node.
+	 */
 	public function renameNode($nodeName, $nodeNewName)
 	{
 		$sql = 'UPDATE tree SET name="'.$nodeNewName.'" WHERE name="'.$nodeName.'";';
-		return $this->db->query($sql);
+		$this->db->query($sql);
 	}
 
 }
-
-//end class
 ?>

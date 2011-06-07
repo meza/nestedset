@@ -1,5 +1,5 @@
 @ajax
-Feature: Rename
+Feature: Renaming nodes should be available through REST POST
   Scenario: Rename node
     Given I have a set
       | name        | lft | rht |

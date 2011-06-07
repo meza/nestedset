@@ -1,15 +1,47 @@
 <?php
+/**
+ * NodeGetCommand.php
+ *
+ * @author meza <meza@meza.hu>
+ */
+
+/**
+ * The NodeGetCommand gets executed on requesting a given node path with the
+ * method: GET.
+ */
 class NodeGetCommand implements NodeCommand
 {
+	/**
+	 * @var NestedSetDao The dao to use.
+	 */
 	private $dao;
+
+	/**
+	 * @var string[] The nodes listed in the path.
+	 */
 	private $nodes;
 
-	public function __construct(NestedSetDao $dao, array $nodes=array())
+
+	/**
+	 * Creates the obejct.
+	 *
+	 * @param NestedSetDao $dao   The dao to use.
+	 * @param string[]     $nodes The nodes on the path.
+	 *
+	 * @return NodeGetCommand
+	 */
+	public function __construct(NestedSetDao $dao, $nodes)
 	{
 		$this->dao   = $dao;
 		$this->nodes = $nodes;
 	}
 
+
+	/**
+	 * Executes the command.
+	 *
+	 * @return RestResponse
+	 */
 	public function createResponse()
 	{
 		$count = count($this->nodes);

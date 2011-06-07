@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * bootstrap.php
+ *
+ * Sets up the environment for the test suite run.
+ *
+ * @author meza <meza@meza.hu>
+ */
 define('SRCDIR', realpath(__DIR__.'/../../src'));
 define('ROOTDIR', realpath(__DIR__.'/../..'));
 
