@@ -9,8 +9,8 @@ CREATE TABLE `tree` (
 	PRIMARY KEY (`name`),
 	KEY `lft` (`lft`),
 	KEY `rht` (`rht`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
-CREATE USER 'meza_demo'@'%' IDENTIFIED BY 'meza_demo_pass';
-GRANT ALL PRIVILEGES ON `meza`.* TO 'meza_demo'@'%';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+#CREATE USER 'meza_demo'@'%' IDENTIFIED BY 'meza_demo_pass';
+GRANT ALL PRIVILEGES ON `meza`.* TO 'meza_demo'@'%' IDENTIFIED BY 'meza_demo_pass';
 FLUSH PRIVILEGES;
-INSERT INTO `tree` (`name`, `lft`, `rht`) VALUES('Root', 1, 2);
+INSERT INTO `tree` VALUES('Root', 1, 2);
