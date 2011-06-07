@@ -7,7 +7,7 @@ Feature: List
       | Child1      | 2   | 5   |
       | GrandChild1 | 3   | 4   |
       | Child2      | 6   | 7   |
-    When I list the tree
+    When I list the tree with html
     Then The resulting html fragment should be '<ul><li id="Root" name="Root">Root<ul><li id="Child1" name="Root/Child1">Child1<ul><li id="GrandChild1" name="Root/Child1/GrandChild1">GrandChild1</li></ul></li></ul><ul><li id="Child2" name="Root/Child2">Child2</li></ul></li></ul>'
 
   Scenario: List partial nodes

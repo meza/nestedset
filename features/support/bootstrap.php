@@ -7,6 +7,7 @@ define('ROOTDIR', realpath(__DIR__.'/../..'));
 require_once('PHPUnit/Autoload.php');
 require_once('PHPUnit/Framework/Assert/Functions.php');
 
+require_once(SRCDIR.'/lib/NestedSet/TreeProcessor.php');
 require_once(SRCDIR.'/lib/NestedSet/Database.php');
 require_once(SRCDIR.'/lib/NestedSet/MysqlDatabase.php');
 require_once(SRCDIR.'/lib/NestedSet/Visitor.php');

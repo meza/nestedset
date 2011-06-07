@@ -13,7 +13,11 @@ class IndexActionCommand implements NodeCommand
 
 	public function createResponse()
 	{
-		return RestResponse::createOKWithHtmlDataResponse($this->layout->render($this->dao->getTree()));
+		return RestResponse::createOKWithHtmlDataResponse(
+			$this->layout->render(
+				$this->dao->getTree(TreeProcessor::createHtmlTree())
+			)
+		);
 	}
 }
 ?>

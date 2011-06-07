@@ -32,12 +32,16 @@ $steps->When('/^I rename the node "([^"]*)" to "([^"]*)"$/', function($world, $n
     $world->dao->renameNode($nodeName, $nodeNewName);
 });
 
-$steps->When('/^I list the tree$/', function($world) {
-    $world->listHtml = $world->dao->getTree();
+$steps->When('/^I list the tree with (html|table)$/', function($world, $strategy) {
+	$s = null;
+	if ($strategy == 'html') {
+		$s = TreeProcessor::createHtmlTree();
+	}
+	$world->listHtml = $world->dao->getTree($s);
 });
 
 $steps->When('/^I list the tree from node "([^"]*)"$/', function($world, $nodeName) {
-    $world->listHtml = $world->dao->getHtmlTreeFromNode($nodeName);
+    $world->listHtml = $world->dao->getTreeFrom($nodeName, TreeProcessor::createHtmlTree());
 });
 
 
@@ -48,7 +52,7 @@ $steps->Then("/^The resulting html fragment should be '([^']*)'$/", function($wo
 
 
 $steps->Then('/^The result is$/', function($world, $table) {
-    $set  = $world->dao->getTreeFromNode('Root');
+    $set  = $world->dao->getTree();
 	$hash = $table->getHash();
 	assertEquals($hash, $set);
 });

@@ -15,6 +15,7 @@ require_once(SRCDIR.'/lib/rest/NodePutCommand.php');
 require_once(SRCDIR.'/lib/rest/NodePostCommand.php');
 require_once(SRCDIR.'/lib/rest/NodeGetCommand.php');
 require_once(SRCDIR.'/lib/rest/NodeDeleteCommand.php');
+require_once(SRCDIR.'/lib/NestedSet/TreeProcessor.php');
 require_once(SRCDIR.'/lib/NestedSet/Database.php');
 require_once(SRCDIR.'/lib/NestedSet/MysqlDatabase.php');
 require_once(SRCDIR.'/lib/NestedSet/NestedSetDao.php');
@@ -41,7 +42,13 @@ $path   = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 $commandBuilder = new CommandBuilder();
-$command        = $commandBuilder->getCommand($dao, $path, $method, $_POST, new HtmlLayout(__DIR__.'/templates/index.html'));
+$command        = $commandBuilder->getCommand(
+	$dao,
+	$path,
+	$method,
+	$_POST,
+	new HtmlLayout(__DIR__.'/templates/index.html')
+);
 $response       = $command->createResponse();
 
 $response->send();
