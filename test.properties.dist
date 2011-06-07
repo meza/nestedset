@@ -1,8 +1,8 @@
 [database]
 	host=127.0.0.1
-	user=ns
-	pass=ns
-	db=ns
+	user=meza_demo
+	pass=meza_demo_pass
+	db=meza
 
 [http]
 	baseUrl=http://127.0.0.1

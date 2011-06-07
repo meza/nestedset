@@ -1,3 +1,5 @@
+Feladatkiírás:
+
 A feladat egy faszerkezet kezelésének megoldása.
 A böngészőben unordered list (UL>LI) formában jelenítsd meg az adatbázisban tárolt fát.
 Legyen lehetőség új faelem hozzáadására, régi törlésére, a faelem nevének átírására.
@@ -9,3 +11,25 @@ Amit szeretnénk kapni:
 - mysql adatbázis generáló és adatbetöltő szkript
 - php, html/javascript kódok
 - rövid dokumentáció a működésről, telepítésről
+
+
+Használat:
+	Mysql:
+		A MYSQL Adatbázis beállítása a forrás gyökerében található setup.sql fájl mysql-be való betöltésével érhető el.
+		Ez létrehoz egy "meza" nevű adatbázist egy "tree" táblával.
+		Létrehoz egy "meza_demo" felhasználót "meza_demo_pass" jelszóval.
+
+	Apache:
+		mod-rewrite modul szükséges
+		Az alkalmazásnak egy saját hostnéven célszerű futnia, hogy a rewrite-ok működjenek megfelelően.
+
+	Konfiguráció:
+		A forrás gyökerében található run.properties.dist fájlban található az összes szükséges konfigurációs paraméter.
+		Ha a setup.sql-ben módosul bármeliyk paraméter, a run.properties.dist fájlban is át kell írni azokat. Lehetőség van
+		egy run.properties fájl létrehozásával is felülírni az eredeti fájlt. (Ennek verziókezelésben van szerepe. A dist fájl a repoban,
+		a *.properties pedig ignore listán van).
+
+	Tesztelés:
+		A behat telepítése szükséges: http://behat.org/
+		A test.properties.dist fájl tartalmazza a teszt futáshoz szükséges konfigurációkat. Ezt is testre kell szabni a kívánalmaknak megfelelően.
+		A behatos tesztek futtatásához a projekt gyökerében ki kel adni a 'behat' parancsot.
